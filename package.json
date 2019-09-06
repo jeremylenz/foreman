@@ -29,6 +29,7 @@
     "chromedriver": "2.46.0"
   },
   "devDependencies": {
+    "@patternfly/react-core": "^3.87.3",
     "@storybook/addon-actions": "~3.4.12",
     "@storybook/addon-knobs": "~3.4.12",
     "@storybook/react": "~3.4.12",
