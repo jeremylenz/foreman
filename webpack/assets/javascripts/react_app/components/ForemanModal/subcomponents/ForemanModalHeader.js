@@ -4,13 +4,12 @@ import { Modal } from 'patternfly-react';
 import { useModalContext } from '../ForemanModalHooks';
 
 const ForemanModalHeader = props => {
-  const childCount = React.Children.count(props.children);
   const { title } = useModalContext();
   // Render the provided children, or default markup if none given
   return (
     <Modal.Header closeButton {...props}>
+      {title && <Modal.Title>{title}</Modal.Title>}
       {props.children}
-      {childCount === 0 && title && <Modal.Title>{title}</Modal.Title>}
     </Modal.Header>
   );
 };

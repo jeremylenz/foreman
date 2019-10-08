@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForemanModal selectors selects entire modals state 1`] = `
+Object {
+  "myModal": Object {
+    "open": true,
+  },
+  "yourModal": Object {
+    "open": false,
+  },
+}
+`;
+
+exports[`ForemanModal selectors selects specific modal by id 1`] = `
+Object {
+  "open": true,
+}
+`;

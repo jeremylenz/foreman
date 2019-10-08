@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'patternfly-react';
 import { storiesOf } from '@storybook/react';
+import storeDecorator from '../../../../../stories/storeDecorator';
 import ForemanModal from '.';
+import { useForemanModal } from './ForemanModalHooks';
 import Story from '../../../../../stories/components/Story';
 
-// This custom Hook is only for the Storybook
-const useModalState = initialModalState => {
-  const [modalOpen, setModalOpen] = useState(initialModalState);
-  const toggleModal = () => setModalOpen(!modalOpen);
-  return [modalOpen, toggleModal];
-};
-
-storiesOf('Components/ForemanModal', module).add(
-  'With default header & footer',
-  () =>
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With default header & footer', () =>
     // using createElement here so that hooks work in stories
     React.createElement(() => {
-      const [modalOpen, toggleModal] = useModalState(false);
+      const [, toggleModal] = useForemanModal({ id: 'default' }); // not using modalOpen so not assigning it
       return (
         <Story>
           <Button bsStyle="primary" onClick={toggleModal}>
             Show Modal
           </Button>
-          <ForemanModal
-            isOpen={modalOpen}
-            title="I'm a modal!"
-            onClose={toggleModal}
-          >
+          <ForemanModal id="default" title="I'm a modal!">
             <ForemanModal.Header />
             This is the modal body
             <ForemanModal.Footer />
@@ -34,23 +25,19 @@ storiesOf('Components/ForemanModal', module).add(
         </Story>
       );
     })
-);
+  );
 
-storiesOf('Components/ForemanModal', module).add(
-  'With custom header & footer',
-  () =>
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With custom header & footer', () =>
     React.createElement(() => {
-      const [modalOpen, toggleModal] = useModalState(false);
+      const [, toggleModal] = useForemanModal({ id: 'custom' });
       return (
         <Story>
           <Button bsStyle="primary" onClick={toggleModal}>
             Show Modal
           </Button>
-          <ForemanModal
-            isOpen={modalOpen}
-            title="I'm a custom modal!"
-            onClose={toggleModal}
-          >
+          <ForemanModal id="custom" title="I'm a custom modal!">
             <ForemanModal.Header>
               <h3>This is a custom header! :)</h3>
             </ForemanModal.Header>
@@ -63,90 +50,79 @@ storiesOf('Components/ForemanModal', module).add(
         </Story>
       );
     })
-);
+  );
 
-storiesOf('Components/ForemanModal', module).add('With no close button', () =>
-  React.createElement(() => {
-    const [modalOpen, toggleModal] = useModalState(false);
-    return (
-      <Story>
-        <Button bsStyle="primary" onClick={toggleModal}>
-          Show Modal
-        </Button>
-        <ForemanModal
-          isOpen={modalOpen}
-          title="I'm an X-less modal!"
-          onClose={toggleModal}
-        >
-          <ForemanModal.Header closeButton={false} />
-          <br />
-          Props passed to ForemanModal.Header will be passed down to
-          Modal.Header
-          <ForemanModal.Footer />
-        </ForemanModal>
-      </Story>
-    );
-  })
-);
-
-storiesOf('Components/ForemanModal', module).add('With no footer', () =>
-  React.createElement(() => {
-    const [modalOpen, toggleModal] = useModalState(false);
-    return (
-      <Story>
-        <Button bsStyle="primary" onClick={toggleModal}>
-          Show Modal
-        </Button>
-        <ForemanModal
-          isOpen={modalOpen}
-          title="I'm a modal!"
-          onClose={toggleModal}
-        >
-          <ForemanModal.Header />
-          This is the modal body. There is no footer.
-        </ForemanModal>
-      </Story>
-    );
-  })
-);
-
-storiesOf('Components/ForemanModal', module).add('With no header', () =>
-  React.createElement(() => {
-    const [modalOpen, toggleModal] = useModalState(false);
-    return (
-      <Story>
-        <Button bsStyle="primary" onClick={toggleModal}>
-          Show Modal
-        </Button>
-        <ForemanModal
-          isOpen={modalOpen}
-          title="I'm a modal!"
-          onClose={toggleModal}
-        >
-          This is the modal body. There is no header.
-          <ForemanModal.Footer />
-        </ForemanModal>
-      </Story>
-    );
-  })
-);
-
-storiesOf('Components/ForemanModal', module).add(
-  'With props passed down via spread syntax',
-  () =>
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With no close button', () =>
     React.createElement(() => {
-      const [modalOpen, toggleModal] = useModalState(false);
+      const [, toggleModal] = useForemanModal({ id: 'noClose' });
       return (
         <Story>
           <Button bsStyle="primary" onClick={toggleModal}>
             Show Modal
           </Button>
-          <ForemanModal
-            isOpen={modalOpen}
-            title="I'm a modal!"
-            onClose={toggleModal}
-            myProp="Hii"
-          >
+          <ForemanModal id="noClose" title="I'm an X-less modal!">
+            <ForemanModal.Header closeButton={false} />
+            <br />
+            Props passed to ForemanModal.Header will be passed down to
+            Modal.Header
+            <ForemanModal.Footer />
+          </ForemanModal>
+        </Story>
+      );
+    })
+  );
+
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With no footer', () =>
+    React.createElement(() => {
+      const [, toggleModal] = useForemanModal({ id: 'noFooter' });
+      return (
+        <Story>
+          <Button bsStyle="primary" onClick={toggleModal}>
+            Show Modal
+          </Button>
+          <ForemanModal id="noFooter" title="I'm a modal!">
+            <ForemanModal.Header />
+            This is the modal body. There is no footer.
+          </ForemanModal>
+        </Story>
+      );
+    })
+  );
+
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With no header', () =>
+    React.createElement(() => {
+      const [, toggleModal] = useForemanModal({ id: 'noHeader' });
+      return (
+        <Story>
+          <Button bsStyle="primary" onClick={toggleModal}>
+            Show Modal
+          </Button>
+          <ForemanModal id="noHeader" title="I'm a modal!">
+            This is the modal body. There is no header.
+            <ForemanModal.Footer />
+          </ForemanModal>
+        </Story>
+      );
+    })
+  );
+
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
+  .add('With props passed down via spread syntax', () =>
+    React.createElement(() => {
+      const [, toggleModal] = useForemanModal({ id: 'propsPassed' });
+      return (
+        <Story>
+          <Button bsStyle="primary" onClick={toggleModal}>
+            Show Modal
+          </Button>
+          <ForemanModal id="propsPassed" title="I'm a modal!" myProp="Hii">
             <ForemanModal.Header />
             The inner {`<Modal>`} component will have any props you pass to
             {`<ForemanModal>`}. (Look in the React dev tools for
@@ -156,4 +132,4 @@ storiesOf('Components/ForemanModal', module).add(
         </Story>
       );
     })
-);
+  );

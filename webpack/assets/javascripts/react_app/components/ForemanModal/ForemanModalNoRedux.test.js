@@ -1,28 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { Modal } from 'patternfly-react';
-import { mount } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
 import ForemanModal from '.';
 import { testComponentSnapshotsWithFixtures } from '../../common/testHelpers';
 
-const middlewares = [];
-const mockStore = configureMockStore(middlewares);
-const state = {
-  foremanModals: {
-    render: { open: true },
-    closed: { open: false },
-    withSuppliedChildren: { open: true },
-    unordered: { open: true },
-  },
-};
-
-const ConnectedForemanModal = props => (
-  <Provider store={mockStore(state)}>
-    <ForemanModal {...props} />
-  </Provider>
-);
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(fn =>
+    fn({
+      // call the selector with this fake state
+      foremanModals: {
+        render: { open: true },
+        closed: { open: false },
+        withSuppliedChildren: { open: true },
+        unordered: { open: true },
+      },
+    })
+  ),
+  useDispatch: jest.fn(action => action),
+}));
 
 const headerChild = (
   <ForemanModal.Header>this is the header</ForemanModal.Header>
@@ -51,23 +45,19 @@ const fixtures = {
     title: 'Test modal',
     children: [modalBody, footerChild, headerChild],
   },
+  'sets show prop to true based on redux state': {
+    id: 'render',
+    title: 'open modal',
+  },
+  'sets show prop to false based on redux state': {
+    id: 'closed',
+    title: 'open modal',
+  },
 };
 
 describe('ForemanModal', () => {
   describe('rendering', () => {
-    testComponentSnapshotsWithFixtures(ConnectedForemanModal, fixtures);
-    it('sets show prop to true based on redux state', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal id="render" title="open modal" />
-      );
-      expect(wrapper.find(Modal).prop('show')).toEqual(true);
-    });
-    it('sets show prop to false based on redux state', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal id="closed" title="open modal" />
-      );
-      expect(wrapper.find(Modal).prop('show')).toEqual(false);
-    });
+    testComponentSnapshotsWithFixtures(ForemanModal, fixtures);
   });
   describe('PropTypes', () => {
     it('requires an id prop', () => {

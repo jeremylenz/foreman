@@ -28,7 +28,7 @@ describe('ForemanModal.Header', () => {
     testComponentSnapshotsWithFixtures(ForemanModalHeader, fixtures);
   });
   describe('data flow', () => {
-    it('renders a <Modal.Title> and title prop when no children are given', () => {
+    it('renders a <Modal.Title> and title prop', () => {
       const wrapper = shallow(<ForemanModalHeader />);
       expect(wrapper.find(Modal.Title)).toHaveLength(1);
       expect(
@@ -37,14 +37,6 @@ describe('ForemanModal.Header', () => {
           .dive()
           .text()
       ).toMatch(contextValues.title);
-    });
-    it('ignores title prop if children are given', () => {
-      const wrapper = shallow(
-        <ForemanModalHeader>
-          <div>custom title</div>
-        </ForemanModalHeader>
-      );
-      expect(wrapper.find(Modal.Title)).toHaveLength(0);
     });
     it('passes props to PF component using spread', () => {
       const wrapper = shallow(<ForemanModalHeader myCustomProp="hi" />);
