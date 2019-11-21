@@ -13,7 +13,7 @@ exports[`ForemanModal rendering renders header and footer in correct order regar
     }
   }
 >
-  <ForemanModal
+  <ConnectedForemanModal
     id="unordered"
     title="Test modal"
   >
@@ -26,7 +26,7 @@ exports[`ForemanModal rendering renders header and footer in correct order regar
     <ForemanModalHeader>
       this is the header
     </ForemanModalHeader>
-  </ForemanModal>
+  </ConnectedForemanModal>
 </Provider>
 `;
 
@@ -43,7 +43,7 @@ exports[`ForemanModal rendering renders when header and footer are supplied 1`] 
     }
   }
 >
-  <ForemanModal
+  <ConnectedForemanModal
     id="withSuppliedChildren"
     title="Test modal"
   >
@@ -56,7 +56,7 @@ exports[`ForemanModal rendering renders when header and footer are supplied 1`] 
     <ForemanModalFooter>
       this is the footer
     </ForemanModalFooter>
-  </ForemanModal>
+  </ConnectedForemanModal>
 </Provider>
 `;
 
@@ -73,7 +73,7 @@ exports[`ForemanModal rendering should render 1`] = `
     }
   }
 >
-  <ForemanModal
+  <ConnectedForemanModal
     id="render"
     title="Test modal"
   />
@@ -93,7 +93,7 @@ exports[`ForemanModal rendering should render closed 1`] = `
     }
   }
 >
-  <ForemanModal
+  <ConnectedForemanModal
     id="closed"
     title="Test modal"
   />

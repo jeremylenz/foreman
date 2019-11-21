@@ -1,297 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ForemanModal rendering renders header and footer in correct order regardless of ordering of children 1`] = `
-<ContextProvider
-  value={
-    Object {
-      "isOpen": true,
-      "onClose": [Function],
-      "title": "Test modal",
-    }
-  }
->
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
-  >
-    <ForemanModalHeader
-      key=".2"
-    >
-      this is the header
-    </ForemanModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <div
-        key=".0"
-      >
-        This is the body
-      </div>
-    </ModalBody>
-    <ForemanModalFooter
-      key=".1"
-    >
-      this is the footer
-    </ForemanModalFooter>
-  </Modal>
-</ContextProvider>
-`;
-
 exports[`ForemanModal rendering renders when header and footer are supplied 1`] = `
-<ContextProvider
-  value={
+<ForemanModal
+  id="withSuppliedChildren"
+  onClose={[Function]}
+  openState={
     Object {
-      "isOpen": true,
-      "onClose": [Function],
-      "title": "Test modal",
+      "open": true,
     }
   }
+  title="Test modal"
 >
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
-  >
-    <ForemanModalHeader
-      key=".0"
-    >
-      this is the header
-    </ForemanModalHeader>
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    >
-      <div
-        key=".1"
-      >
-        This is the body
-      </div>
-    </ModalBody>
-    <ForemanModalFooter
-      key=".2"
-    >
-      this is the footer
-    </ForemanModalFooter>
-  </Modal>
-</ContextProvider>
+  <ForemanModalHeader>
+    this is the header
+  </ForemanModalHeader>
+  <div>
+    This is the body
+  </div>
+  <ForemanModalFooter>
+    this is the footer
+  </ForemanModalFooter>
+</ForemanModal>
 `;
 
-exports[`ForemanModal rendering sets show prop to false based on redux state 1`] = `
-<ContextProvider
-  value={
+exports[`ForemanModal rendering sets open state to false based on redux state 1`] = `
+<ForemanModal
+  id="closed"
+  onClose={[Function]}
+  openState={
     Object {
-      "isOpen": false,
-      "onClose": [Function],
-      "title": "open modal",
+      "open": false,
     }
   }
->
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    />
-  </Modal>
-</ContextProvider>
+  title="open modal"
+/>
 `;
 
-exports[`ForemanModal rendering sets show prop to true based on redux state 1`] = `
-<ContextProvider
-  value={
+exports[`ForemanModal rendering sets open state to true based on redux state 1`] = `
+<ForemanModal
+  id="render"
+  onClose={[Function]}
+  openState={
     Object {
-      "isOpen": true,
-      "onClose": [Function],
-      "title": "open modal",
+      "open": true,
     }
   }
->
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
-  >
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    />
-  </Modal>
-</ContextProvider>
+  title="open modal"
+/>
 `;
 
 exports[`ForemanModal rendering should render 1`] = `
-<ContextProvider
-  value={
+<ForemanModal
+  id="render"
+  onClose={[Function]}
+  openState={
     Object {
-      "isOpen": true,
-      "onClose": [Function],
-      "title": "Test modal",
+      "open": true,
     }
   }
->
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={true}
-  >
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    />
-  </Modal>
-</ContextProvider>
+  title="Test modal"
+/>
 `;
 
 exports[`ForemanModal rendering should render closed 1`] = `
-<ContextProvider
-  value={
+<ForemanModal
+  id="closed"
+  onClose={[Function]}
+  openState={
     Object {
-      "isOpen": false,
-      "onClose": [Function],
-      "title": "Test modal",
+      "open": false,
     }
   }
->
-  <Modal
-    animation={true}
-    autoFocus={true}
-    backdrop={true}
-    bsClass="modal"
-    className="foreman-modal"
-    dialogComponentClass={[Function]}
-    enforceFocus={true}
-    keyboard={true}
-    manager={
-      ModalManager {
-        "add": [Function],
-        "containers": Array [],
-        "data": Array [],
-        "handleContainerOverflow": true,
-        "hideSiblingNodes": true,
-        "isTopModal": [Function],
-        "modals": Array [],
-        "remove": [Function],
-      }
-    }
-    onHide={[Function]}
-    renderBackdrop={[Function]}
-    restoreFocus={true}
-    show={false}
-  >
-    <ModalBody
-      bsClass="modal-body"
-      componentClass="div"
-    />
-  </Modal>
-</ContextProvider>
+  title="Test modal"
+/>
 `;

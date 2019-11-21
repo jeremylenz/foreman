@@ -54,6 +54,31 @@ storiesOf('Components/ForemanModal', module)
 
 storiesOf('Components/ForemanModal', module)
   .addDecorator(storeDecorator) // add Redux store to story
+  .add('With unordered header & footer', () =>
+    React.createElement(() => {
+      const [, toggleModal] = useForemanModal({ id: 'custom' });
+      return (
+        <Story>
+          <Button bsStyle="primary" onClick={toggleModal}>
+            Show Modal
+          </Button>
+          <ForemanModal id="custom" title="I'm a custom modal!">
+            <div>
+              Header and footer will be correctly ordered when rendering, even
+              if they are out of order in the markup
+            </div>
+            <ForemanModal.Footer>This is the footer</ForemanModal.Footer>
+            <ForemanModal.Header>
+              <h3>This is the header</h3>
+            </ForemanModal.Header>
+          </ForemanModal>
+        </Story>
+      );
+    })
+  );
+
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
   .add('With no close button', () =>
     React.createElement(() => {
       const [, toggleModal] = useForemanModal({ id: 'noClose' });

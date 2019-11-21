@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ForemanModal from '.';
+import ForemanModalHeader from './subcomponents/ForemanModalHeader';
+import ForemanModalFooter from './subcomponents/ForemanModalFooter';
 import { testComponentSnapshotsWithFixtures } from '../../common/testHelpers';
 
 jest.mock('react-redux', () => ({
@@ -40,16 +42,11 @@ const fixtures = {
     title: 'Test modal',
     children: [headerChild, modalBody, footerChild],
   },
-  'renders header and footer in correct order regardless of ordering of children': {
-    id: 'unordered',
-    title: 'Test modal',
-    children: [modalBody, footerChild, headerChild],
-  },
-  'sets show prop to true based on redux state': {
+  'sets open state to true based on redux state': {
     id: 'render',
     title: 'open modal',
   },
-  'sets show prop to false based on redux state': {
+  'sets open state to false based on redux state': {
     id: 'closed',
     title: 'open modal',
   },
@@ -58,6 +55,14 @@ const fixtures = {
 describe('ForemanModal', () => {
   describe('rendering', () => {
     testComponentSnapshotsWithFixtures(ForemanModal, fixtures);
+  });
+  describe('subcomponents', () => {
+    it('has a Header subcomponent', () => {
+      expect(ForemanModal.Header).toEqual(ForemanModalHeader);
+    });
+    it('has a Footer subcomponent', () => {
+      expect(ForemanModal.Footer).toEqual(ForemanModalFooter);
+    });
   });
   describe('PropTypes', () => {
     it('requires an id prop', () => {

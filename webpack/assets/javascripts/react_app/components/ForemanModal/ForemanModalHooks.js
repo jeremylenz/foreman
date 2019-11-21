@@ -19,7 +19,6 @@ export const useForemanModal = ({ id, open = false }) => {
   const modalOpenState = useSelector(state => selectModalStateById(state, id));
   const modalOpen = modalOpenState ? modalOpenState.open : false;
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!id) return;
     dispatch({
@@ -27,7 +26,6 @@ export const useForemanModal = ({ id, open = false }) => {
       payload: { id, open: initialModalState },
     });
   }, [initialModalState, dispatch, id]);
-
   const toggleModal = () => {
     if (modalOpen) {
       dispatch({
