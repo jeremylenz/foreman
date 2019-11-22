@@ -1,5 +1,4 @@
 import Immutable from 'seamless-immutable';
-import { translate as __ } from '../../../react_app/common/I18n';
 import {
   SET_MODAL_OPEN,
   SET_MODAL_CLOSED,
@@ -15,13 +14,6 @@ const initialState = Immutable({});
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_MODAL_OPEN: {
-      if (!state[action.payload.id]) {
-        throw new Error(
-          __(
-            `SET_MODAL_OPEN error: Modal with id '${action.payload.id}' does not exist`
-          )
-        );
-      }
       const newState = {};
       newState[action.payload.id] = {
         open: true,
@@ -29,13 +21,6 @@ export default (state = initialState, action) => {
       return state.merge(newState);
     }
     case SET_MODAL_CLOSED: {
-      if (!state[action.payload.id]) {
-        throw new Error(
-          __(
-            `SET_MODAL_CLOSED error: Modal with id '${action.payload.id}' does not exist`
-          )
-        );
-      }
       const newState = {};
       newState[action.payload.id] = {
         open: false,

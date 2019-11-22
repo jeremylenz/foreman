@@ -50,28 +50,6 @@ describe('ForemanModal reducer', () => {
     });
   });
 
-  describe('SET_MODAL_OPEN', () => {
-    it('throws an error if you try to open a nonexistent modal', () => {
-      expect(() => {
-        reducer(modalsState, {
-          type: SET_MODAL_OPEN,
-          payload: { id: 'doesNotExist' },
-        });
-      }).toThrow('does not exist');
-    });
-  });
-
-  describe('SET_MODAL_CLOSED', () => {
-    it('throws an error if you try to close a nonexistent modal', () => {
-      expect(() => {
-        reducer(modalsState, {
-          type: SET_MODAL_CLOSED,
-          payload: { id: 'doesNotExist' },
-        });
-      }).toThrow('does not exist');
-    });
-  });
-
   describe('snapshots', () =>
     testReducerSnapshotWithFixtures(reducer, fixtures));
 });

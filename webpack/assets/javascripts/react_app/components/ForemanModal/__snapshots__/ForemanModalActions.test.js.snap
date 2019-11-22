@@ -4,6 +4,7 @@ exports[`ForemanModal actions creates the modal 1`] = `
 Object {
   "payload": Object {
     "id": "testModal",
+    "open": false,
   },
   "type": "ADD_MODAL",
 }
@@ -12,7 +13,7 @@ Object {
 exports[`ForemanModal actions should close modal 1`] = `
 Object {
   "payload": Object {
-    "id": "testModal",
+    "id": "modal1",
   },
   "type": "SET_MODAL_CLOSED",
 }
@@ -21,7 +22,7 @@ Object {
 exports[`ForemanModal actions should open modal 1`] = `
 Object {
   "payload": Object {
-    "id": "testModal",
+    "id": "modal2",
   },
   "type": "SET_MODAL_OPEN",
 }
