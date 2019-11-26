@@ -10,19 +10,17 @@ const ForemanModal = props => {
   const { headerChild, footerChild, otherChildren } = extractModalNodes(
     children
   );
-  const isOpen = false || (openState && openState.open);
   const context = {
-    isOpen,
+    isOpen: openState.open,
     onClose,
     title,
   };
 
   return (
     <ModalContext.Provider value={context}>
-      {/* Change the name of the props we are passing down to Modal to conform to Patternfly 3 api */}
       <Modal
         onHide={onClose}
-        show={isOpen}
+        show={openState.open}
         className="foreman-modal"
         {...propsToPassDown}
       >

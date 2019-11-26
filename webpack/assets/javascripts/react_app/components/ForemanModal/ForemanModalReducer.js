@@ -13,28 +13,16 @@ const initialState = Immutable({});
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_MODAL_OPEN: {
-      const newState = {};
-      newState[action.payload.id] = {
-        open: true,
-      };
-      return state.merge(newState);
-    }
-    case SET_MODAL_CLOSED: {
-      const newState = {};
-      newState[action.payload.id] = {
-        open: false,
-      };
-      return state.merge(newState);
-    }
-    case ADD_MODAL: {
+    case SET_MODAL_OPEN:
+      return state.setIn([action.payload.id, 'open'], true); // setIn(keypath, value)
+    case SET_MODAL_CLOSED:
+      return state.setIn([action.payload.id, 'open'], false);
+    case ADD_MODAL:
       if (state[action.payload.id]) return state; // if it already exists, don't change its state
-      const newState = {};
-      newState[action.payload.id] = {
-        open: action.payload.open || false,
-      };
-      return state.merge(newState);
-    }
+      return state.setIn(
+        [action.payload.id, 'open'],
+        action.payload.open || false
+      );
     default:
       return state;
   }
