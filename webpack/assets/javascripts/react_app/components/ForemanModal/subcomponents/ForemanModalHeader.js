@@ -5,6 +5,7 @@ import { useModalContext } from '../ForemanModalHooks';
 
 const ForemanModalHeader = props => {
   const { title } = useModalContext();
+  // title will be falsey if its value is the default ''
   // Render the provided children, or default markup if none given
   return (
     <Modal.Header closeButton {...props}>

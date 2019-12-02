@@ -15,6 +15,9 @@ const state = {
     closed: { open: false },
     withSuppliedChildren: { open: true },
     unordered: { open: true },
+    defaultHeaderChild: { open: true },
+    customHeaderChild: { open: true },
+    noHeader: { open: true },
   },
 };
 
@@ -67,6 +70,43 @@ describe('ForemanModal', () => {
         <ConnectedForemanModal id="closed" title="open modal" />
       );
       expect(wrapper.find(Modal).prop('show')).toEqual(false);
+    });
+    it('renders default header child when title prop is present', () => {
+      const wrapper = mount(
+        <ConnectedForemanModal
+          id="defaultHeaderChild"
+          title="hi im a default header"
+        >
+          {modalBody}
+          {footerChild}
+        </ConnectedForemanModal>
+      );
+      expect(wrapper.find(ForemanModal.Header)).toHaveLength(1);
+      expect(wrapper.text()).toMatch(/hi im a default header/);
+    });
+    it('renders the supplied header child when title prop is not present', () => {
+      const customHeader = (
+        <ForemanModal.Header>hey this is custom</ForemanModal.Header>
+      );
+      const wrapper = mount(
+        <ConnectedForemanModal id="customHeaderChild">
+          {customHeader}
+          {modalBody}
+          {footerChild}
+        </ConnectedForemanModal>
+      );
+      expect(wrapper.find(ForemanModal.Header)).toHaveLength(1);
+      expect(wrapper.text()).toMatch(/hey this is custom/);
+    });
+
+    it('renders without header when neither <ForemanModal.Header> nor title prop are present', () => {
+      const wrapper = mount(
+        <ConnectedForemanModal id="noHeader">
+          {modalBody}
+          {footerChild}
+        </ConnectedForemanModal>
+      );
+      expect(wrapper.find(ForemanModal.Header)).toHaveLength(0);
     });
   });
   describe('PropTypes', () => {

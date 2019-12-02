@@ -28,7 +28,11 @@ const ConnectedForemanModal = props => {
 
 ConnectedForemanModal.propTypes = {
   id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+};
+
+ConnectedForemanModal.defaultProps = {
+  title: '',
 };
 
 // Header and Footer use the provided children, or default markup if none provided

@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal } from 'patternfly-react';
 import PropTypes from 'prop-types';
 import ModalContext from './ForemanModalContext';
+import ForemanModalHeader from './subcomponents/ForemanModalHeader';
 import { extractModalNodes } from './helpers';
 
 const ForemanModal = props => {
@@ -16,6 +17,10 @@ const ForemanModal = props => {
     title,
   };
 
+  let headerToRender = null; // if no headerChild and no title prop, then no <ForemanModalHeader>
+  if (!headerChild && title) headerToRender = <ForemanModalHeader />; // render default header with title
+  if (headerChild) headerToRender = headerChild; // render the custom header supplied as a child
+
   return (
     <ModalContext.Provider value={context}>
       <Modal
@@ -24,7 +29,7 @@ const ForemanModal = props => {
         className="foreman-modal"
         {...propsToPassDown}
       >
-        {headerChild}
+        {headerToRender}
         <Modal.Body>{otherChildren}</Modal.Body>
         {footerChild}
       </Modal>
@@ -34,7 +39,7 @@ const ForemanModal = props => {
 
 ForemanModal.propTypes = {
   children: PropTypes.node,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   id: PropTypes.string.isRequired,
   openState: PropTypes.shape({
     open: PropTypes.bool,
@@ -47,6 +52,7 @@ ForemanModal.defaultProps = {
   openState: {
     open: false,
   },
+  title: '',
 };
 
 export default ForemanModal;

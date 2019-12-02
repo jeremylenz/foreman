@@ -29,6 +29,23 @@ storiesOf('Components/ForemanModal', module)
 
 storiesOf('Components/ForemanModal', module)
   .addDecorator(storeDecorator) // add Redux store to story
+  .add('With no children', () =>
+    // using createElement here so that hooks work in stories
+    React.createElement(() => {
+      const [, toggleModal] = useForemanModal({ id: 'noChildren' }); // not using modalOpen so not assigning it
+      return (
+        <Story>
+          <Button bsStyle="primary" onClick={toggleModal}>
+            Show Modal
+          </Button>
+          <ForemanModal id="noChildren" title="I'm a modal!" />
+        </Story>
+      );
+    })
+  );
+
+storiesOf('Components/ForemanModal', module)
+  .addDecorator(storeDecorator) // add Redux store to story
   .add('With custom header & footer', () =>
     React.createElement(() => {
       const [, toggleModal] = useForemanModal({ id: 'custom' });
@@ -128,7 +145,7 @@ storiesOf('Components/ForemanModal', module)
           <Button bsStyle="primary" onClick={toggleModal}>
             Show Modal
           </Button>
-          <ForemanModal id="noHeader" title="I'm a modal!">
+          <ForemanModal id="noHeader" noHeader title="I'm a modal!">
             This is the modal body. There is no header.
             <ForemanModal.Footer />
           </ForemanModal>
