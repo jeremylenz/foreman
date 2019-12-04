@@ -16,19 +16,19 @@ export const useForemanModal = ({ id, open = false }) => {
   const modalOpenState = useSelector(state => selectModalStateById(state, id));
   const modalOpen = modalOpenState ? modalOpenState.open : false;
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (modalOpenState) return; // don't add modal if it already exists
     dispatch(addModal({ id, open: initialModalState }));
   }, [initialModalState, dispatch, id]);
-  const toggleModal = () => {
-    if (modalOpen) {
-      dispatch(setModalClosed({ id }));
-    } else {
-      dispatch(setModalOpen({ id }));
-    }
-  };
+  const boundSetModalClosed = () => dispatch(setModalClosed({ id }));
+  const boundSetModalOpen = () => dispatch(setModalOpen({ id }));
 
-  return [modalOpen, toggleModal];
+  return {
+    modalOpen,
+    setModalOpen: boundSetModalOpen,
+    setModalClosed: boundSetModalClosed,
+  };
 };
 
 // to get enzyme hacky test to work
