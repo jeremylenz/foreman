@@ -1,113 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { Modal } from 'patternfly-react';
-import { mount } from 'enzyme';
-import configureMockStore from 'redux-mock-store';
-import ForemanModal from '.';
+import ForemanModal from './ForemanModal';
+import ForemanModalHeader from './subcomponents/ForemanModalHeader';
+import ForemanModalFooter from './subcomponents/ForemanModalFooter';
 import { testComponentSnapshotsWithFixtures } from '../../common/testHelpers';
 
-const middlewares = [];
-const mockStore = configureMockStore(middlewares);
-const state = {
-  foremanModals: {
-    render: { open: true },
-    closed: { open: false },
-    withSuppliedChildren: { open: true },
-    unordered: { open: true },
-    defaultHeaderChild: { open: true },
-    customHeaderChild: { open: true },
-    noHeader: { open: true },
-  },
-};
+// This file is for unit tests of the ForemanModal component
 
-const ConnectedForemanModal = props => (
-  <Provider store={mockStore(state)}>
-    <ForemanModal {...props} />
-  </Provider>
-);
-
-const headerChild = (
-  <ForemanModal.Header>this is the header</ForemanModal.Header>
-);
-const footerChild = (
-  <ForemanModal.Footer>this is the footer</ForemanModal.Footer>
-);
+const headerChild = <ForemanModalHeader>this is the header</ForemanModalHeader>;
+const footerChild = <ForemanModalFooter>this is the footer</ForemanModalFooter>;
 const modalBody = <div>This is the body</div>;
+const openState = { open: true };
+const closedState = { open: false };
+const onClose = jest.fn();
 
 const fixtures = {
   'should render': {
     id: 'render',
     title: 'Test modal',
+    openState,
+    onClose,
   },
   'should render closed': {
     id: 'closed',
     title: 'Test modal',
+    openState: closedState,
+    onClose,
   },
   'renders when header and footer are supplied': {
     id: 'withSuppliedChildren',
     title: 'Test modal',
     children: [headerChild, modalBody, footerChild],
-  },
-  'renders header and footer in correct order regardless of ordering of children': {
-    id: 'unordered',
-    title: 'Test modal',
-    children: [modalBody, footerChild, headerChild],
+    openState,
+    onClose,
   },
 };
 
 describe('ForemanModal', () => {
   describe('rendering', () => {
-    testComponentSnapshotsWithFixtures(ConnectedForemanModal, fixtures);
-    it('sets show prop to true based on redux state', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal id="render" title="open modal" />
-      );
-      expect(wrapper.find(Modal).prop('show')).toEqual(true);
-    });
-    it('sets show prop to false based on redux state', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal id="closed" title="open modal" />
-      );
-      expect(wrapper.find(Modal).prop('show')).toEqual(false);
-    });
-    it('renders default header child when title prop is present', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal
-          id="defaultHeaderChild"
-          title="hi im a default header"
-        >
-          {modalBody}
-          {footerChild}
-        </ConnectedForemanModal>
-      );
-      expect(wrapper.find(ForemanModal.Header)).toHaveLength(1);
-      expect(wrapper.text()).toMatch(/hi im a default header/);
-    });
-    it('renders the supplied header child when title prop is not present', () => {
-      const customHeader = (
-        <ForemanModal.Header>hey this is custom</ForemanModal.Header>
-      );
-      const wrapper = mount(
-        <ConnectedForemanModal id="customHeaderChild">
-          {customHeader}
-          {modalBody}
-          {footerChild}
-        </ConnectedForemanModal>
-      );
-      expect(wrapper.find(ForemanModal.Header)).toHaveLength(1);
-      expect(wrapper.text()).toMatch(/hey this is custom/);
-    });
-
-    it('renders without header when neither <ForemanModal.Header> nor title prop are present', () => {
-      const wrapper = mount(
-        <ConnectedForemanModal id="noHeader">
-          {modalBody}
-          {footerChild}
-        </ConnectedForemanModal>
-      );
-      expect(wrapper.find(ForemanModal.Header)).toHaveLength(0);
-    });
+    testComponentSnapshotsWithFixtures(ForemanModal, fixtures);
   });
   describe('PropTypes', () => {
     it('requires an id prop', () => {
