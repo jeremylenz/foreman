@@ -22,12 +22,11 @@ describe('factCharts', () => {
     );
     expect(toJson(wrapper)).toMatchSnapshot();
   });
-});
+  it('should open modal after click', () => {
+    const props = { onClick: jest.fn(), data: { id: 1 } };
+    const wrapper = shallow(<FactChart store={Store} {...props} />);
 
-it('should open modal after click', () => {
-  const props = { onClick: jest.fn(), data: { id: 1 } };
-  const wrapper = shallow(<FactChart store={Store} {...props} />);
-
-  wrapper.simulate('click');
-  expect(props.onClick).toBeCalled();
+    wrapper.simulate('click');
+    expect(props.onClick).toBeCalled();
+  });
 });

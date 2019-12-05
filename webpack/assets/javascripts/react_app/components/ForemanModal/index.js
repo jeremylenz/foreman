@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectModalStateById } from './ForemanModalSelectors';
-import { SET_MODAL_CLOSED } from './ForemanModalConstants';
+import { setModalClosed } from './ForemanModalActions';
 import ForemanModal from './ForemanModal';
 import ForemanModalHeader from './subcomponents/ForemanModalHeader';
 import ForemanModalFooter from './subcomponents/ForemanModalFooter';
@@ -14,7 +14,7 @@ const ConnectedForemanModal = props => {
   const { id, title } = props;
   const openState = useSelector(state => selectModalStateById(state, id));
   const dispatch = useDispatch();
-  const onClose = () => dispatch({ type: SET_MODAL_CLOSED, payload: { id } });
+  const onClose = () => dispatch(setModalClosed({ id }));
   return (
     <ForemanModal
       {...props}
