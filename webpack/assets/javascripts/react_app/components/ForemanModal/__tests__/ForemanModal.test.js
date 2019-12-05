@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ForemanModal from './ForemanModal';
-import ForemanModalHeader from './subcomponents/ForemanModalHeader';
-import ForemanModalFooter from './subcomponents/ForemanModalFooter';
-import { testComponentSnapshotsWithFixtures } from '../../common/testHelpers';
+import ForemanModal from '../ForemanModal';
+import ForemanModalHeader from '../subcomponents/ForemanModalHeader';
+import ForemanModalFooter from '../subcomponents/ForemanModalFooter';
+import { testComponentSnapshotsWithFixtures } from '../../../common/testHelpers';
 
 // This file is for unit tests of the ForemanModal component
 
