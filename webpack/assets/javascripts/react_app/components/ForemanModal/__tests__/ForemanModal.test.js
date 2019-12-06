@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ForemanModal from '../ForemanModal';
 import ForemanModalHeader from '../subcomponents/ForemanModalHeader';
 import ForemanModalFooter from '../subcomponents/ForemanModalFooter';
@@ -34,27 +33,29 @@ const fixtures = {
     openState,
     onClose,
   },
+  'renders default header child when title prop is present': {
+    id: 'defaultHeaderChild',
+    title: 'Test modal',
+    children: [modalBody, footerChild],
+    openState,
+    onClose,
+  },
+  'renders the supplied header child when title prop is not present': {
+    id: 'customHeaderChild',
+    children: [headerChild, modalBody, footerChild],
+    openState,
+    onClose,
+  },
+  'renders without header when neither <ForemanModal.Header> nor title prop are present': {
+    id: 'noHeader',
+    children: [modalBody, footerChild],
+    openState,
+    onClose,
+  },
 };
 
 describe('ForemanModal', () => {
   describe('rendering', () => {
     testComponentSnapshotsWithFixtures(ForemanModal, fixtures);
-  });
-  describe('PropTypes', () => {
-    it('requires an id prop', () => {
-      const { propTypes } = ForemanModal;
-      const propsWithoutId = {
-        title: 'Test modal',
-      };
-      PropTypes.resetWarningCache();
-      expect(() =>
-        PropTypes.checkPropTypes(
-          propTypes,
-          propsWithoutId,
-          'prop',
-          'ForemanModal'
-        )
-      ).toThrow('id');
-    });
   });
 });
