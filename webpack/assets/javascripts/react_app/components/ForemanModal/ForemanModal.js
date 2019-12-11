@@ -6,13 +6,13 @@ import ForemanModalHeader from './subcomponents/ForemanModalHeader';
 import { extractModalNodes } from './helpers';
 
 const ForemanModal = props => {
-  const { id, title, onClose, openState, children, ...propsToPassDown } = props;
+  const { id, title, onClose, isOpen, children, ...propsToPassDown } = props;
   // Extract header and footer from children, if provided
   const { headerChild, footerChild, otherChildren } = extractModalNodes(
     children
   );
   const context = {
-    isOpen: openState.open,
+    isOpen,
     onClose,
     title,
   };
@@ -25,7 +25,7 @@ const ForemanModal = props => {
     <ModalContext.Provider value={context}>
       <Modal
         onHide={onClose}
-        show={openState.open}
+        show={isOpen}
         className="foreman-modal"
         {...propsToPassDown}
       >
@@ -41,17 +41,13 @@ ForemanModal.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
   id: PropTypes.string.isRequired,
-  openState: PropTypes.shape({
-    open: PropTypes.bool,
-  }),
+  isOpen: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
 };
 
 ForemanModal.defaultProps = {
   children: null,
-  openState: {
-    open: false,
-  },
+  isOpen: false,
   title: '',
 };
 
