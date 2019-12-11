@@ -1,7 +1,7 @@
-import { useEffect, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectModalStateById } from './ForemanModalSelectors';
-import { addModal, setModalOpen, setModalClosed } from './ForemanModalActions';
+import { selectIsModalOpen } from './ForemanModalSelectors';
+import { setModalOpen, setModalClosed } from './ForemanModalActions';
 import ModalContext from './ForemanModalContext';
 
 // Because enzyme doesn't support useContext yet
@@ -13,16 +13,14 @@ export const useModalContext = () => useContext(ModalContext);
 export const useForemanModal = ({ id, open = false }) => {
   if (!id) throw new Error('useForemanModal: ID is required');
   const initialModalState = open;
-  const modalOpenState = useSelector(state => selectModalStateById(state, id));
-  const modalOpen = modalOpenState ? modalOpenState.open : false;
+  const modalOpen = useSelector(state => selectIsModalOpen(state, id)) || false;
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (modalOpenState) return; // don't add modal if it already exists
-    dispatch(addModal({ id, open: initialModalState }));
-  }, [initialModalState, dispatch, id]);
   const boundSetModalClosed = () => dispatch(setModalClosed({ id }));
   const boundSetModalOpen = () => dispatch(setModalOpen({ id }));
+
+  useEffect(() => {
+    if (initialModalState === true) boundSetModalOpen();
+  }, []);
 
   return {
     modalOpen,

@@ -49,19 +49,9 @@ storiesOf('Components/ForemanModal', module)
             <br />
             <h3>Modal state is controlled with Redux actions</h3>
             <p>
-              First, dispatch an ADD_MODAL action (make sure the ID passed to
-              the action matches your ID prop)<br />
-              <code>
-                {`{
-                  type: 'ADD_MODAL',
-                  id: 'reduxModal'
-                }`}
-              </code>
-            </p>
-            <p>
-              Next, control the modal state with SET_MODAL_OPEN and
-              SET_MODAL_CLOSED. Again, make sure the ID passed to the action
-              matches your ID prop.<br />
+              Control the modal state with SET_MODAL_OPEN and SET_MODAL_CLOSED.
+              Make sure the ID passed to the action matches your ID prop.
+              <br />
               <code>
                 {`{
                   type: 'SET_MODAL_OPEN',
@@ -77,7 +67,8 @@ storiesOf('Components/ForemanModal', module)
               </code>
             </p>
             <p>
-              In this way, ForemanModals can be controlled from anywhere<br />
+              In this way, ForemanModals can be controlled from anywhere
+              <br />
               in the application, with a single source of truth for modal state.
             </p>
             <ForemanModal.Footer />
@@ -132,13 +123,13 @@ storiesOf('Components/ForemanModal', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With unordered header & footer', () =>
     React.createElement(() => {
-      const { setModalOpen } = useForemanModal({ id: 'custom' });
+      const { setModalOpen } = useForemanModal({ id: 'unordered' });
       return (
         <Story>
           <Button bsStyle="primary" onClick={setModalOpen}>
             Show Modal
           </Button>
-          <ForemanModal id="custom" title="I'm a custom modal!">
+          <ForemanModal id="unordered" title="I'm a custom modal!">
             <div>
               Header and footer will be correctly ordered when rendering, even
               if they are out of order in the markup

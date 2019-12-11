@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectIsModalOpen } from './ForemanModalSelectors';
-import { setModalClosed } from './ForemanModalActions';
+import {
+  selectIsModalOpen,
+  selectModalStateById,
+} from './ForemanModalSelectors';
+import { setModalClosed, addModal } from './ForemanModalActions';
 import ForemanModal from './ForemanModal';
 import ForemanModalHeader from './subcomponents/ForemanModalHeader';
 import ForemanModalFooter from './subcomponents/ForemanModalFooter';
@@ -15,6 +18,15 @@ const ConnectedForemanModal = props => {
   const isOpen = useSelector(state => selectIsModalOpen(state, id));
   const dispatch = useDispatch();
   const onClose = () => dispatch(setModalClosed({ id }));
+  const modalAlreadyExists = useSelector(state =>
+    selectModalStateById(state, id)
+  );
+
+  useEffect(() => {
+    if (modalAlreadyExists) return; // don't add modal if it already exists
+    dispatch(addModal({ id, open: false }));
+  }, [modalAlreadyExists, id]);
+
   return (
     <ForemanModal
       {...props}
