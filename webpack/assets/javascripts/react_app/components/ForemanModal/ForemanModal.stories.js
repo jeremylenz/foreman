@@ -6,7 +6,7 @@ import ForemanModal from '.';
 import { useForemanModal } from './ForemanModalHooks';
 import Story from '../../../../../stories/components/Story';
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With default header & footer', () =>
     // using createElement here so that hooks work in stories
@@ -27,58 +27,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
-  .addDecorator(storeDecorator) // add Redux store to story
-  .add('Modal IDs and Redux', () =>
-    // using createElement here so that hooks work in stories
-    React.createElement(() => {
-      const { setModalOpen } = useForemanModal({ id: 'reduxModal' });
-      return (
-        <Story>
-          <Button bsStyle="primary" onClick={setModalOpen}>
-            Show Modal
-          </Button>
-          <ForemanModal id="reduxModal" title="ForemanModal uses Redux">
-            <ForemanModal.Header />
-            <h3>ForemanModals require an ID prop</h3>
-            <p>It should be a descriptive unique string.</p>
-            <br />
-            <code>
-              {`<ForemanModal id="reduxModal" title="ForemanModal uses Redux">`}
-            </code>
-            <br />
-            <h3>Modal state is controlled with Redux actions</h3>
-            <p>
-              Control the modal state with SET_MODAL_OPEN and SET_MODAL_CLOSED.
-              Make sure the ID passed to the action matches your ID prop.
-              <br />
-              <code>
-                {`{
-                  type: 'SET_MODAL_OPEN',
-                  id: 'reduxModal'
-                }`}
-              </code>
-              <br />
-              <code>
-                {`{
-                  type: 'SET_MODAL_CLOSED',
-                  id: 'reduxModal'
-                }`}
-              </code>
-            </p>
-            <p>
-              In this way, ForemanModals can be controlled from anywhere
-              <br />
-              in the application, with a single source of truth for modal state.
-            </p>
-            <ForemanModal.Footer />
-          </ForemanModal>
-        </Story>
-      );
-    })
-  );
-
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With no children', () =>
     // using createElement here so that hooks work in stories
@@ -95,7 +44,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With custom header & footer', () =>
     React.createElement(() => {
@@ -119,7 +68,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With unordered header & footer', () =>
     React.createElement(() => {
@@ -144,7 +93,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With no close button', () =>
     React.createElement(() => {
@@ -166,7 +115,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With no footer', () =>
     React.createElement(() => {
@@ -185,7 +134,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With no header', () =>
     React.createElement(() => {
@@ -206,7 +155,7 @@ storiesOf('Components/ForemanModal', module)
     })
   );
 
-storiesOf('Components/ForemanModal', module)
+storiesOf('Components/ForemanModal/Props & Children', module)
   .addDecorator(storeDecorator) // add Redux store to story
   .add('With props passed down via spread syntax', () =>
     React.createElement(() => {
@@ -221,37 +170,6 @@ storiesOf('Components/ForemanModal', module)
             The inner {`<Modal>`} component will have any props you pass to
             {`<ForemanModal>`}. (Look in the React dev tools for
             &lsquo;myProp&rsquo;)
-            <ForemanModal.Footer />
-          </ForemanModal>
-        </Story>
-      );
-    })
-  );
-
-storiesOf('Components/ForemanModal', module)
-  .addDecorator(storeDecorator) // add Redux store to story
-  .add('With useForemanModal Hook', () =>
-    // using createElement here so that hooks work in stories
-    React.createElement(() => {
-      const { modalOpen, setModalOpen } = useForemanModal({ id: 'hooks' });
-      return (
-        <Story>
-          <Button bsStyle="primary" onClick={setModalOpen}>
-            Modal is{' '}
-            {modalOpen ? 'OPEN. Click to close' : 'CLOSED. Click to open'}
-          </Button>
-          <ForemanModal id="hooks" title="I'm a modal!">
-            <ForemanModal.Header />
-            The useForemanModal hook returns 3 objects: <br />
-            <ul>
-              <li>modalOpen: boolean</li>
-              <li>setModalOpen: function to open that specific modal</li>
-              <li>setModalClosed: function to close that specific modal</li>
-            </ul>
-            <br />
-            These functions take care of the Redux state and actions for you,
-            <br />
-            so you don&apos;t have to connect your parent component directly.
             <ForemanModal.Footer />
           </ForemanModal>
         </Story>
