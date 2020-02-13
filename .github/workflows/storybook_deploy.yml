@@ -3,7 +3,7 @@ name: Deploy Storybook
 on:
   pull_request:
     paths:
-      - '**.stories.js'
+      - '**[Ss]tories**'
 
 jobs:
   deploy_storybook:
