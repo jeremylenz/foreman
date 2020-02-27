@@ -5,7 +5,7 @@ on:
     paths:
       - '**/react_app/**js'
       - '!**.stories.js'
-    # types: opened
+    types: opened
 
 jobs:
   storybook_reminder:
