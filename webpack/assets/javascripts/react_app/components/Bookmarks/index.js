@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
-import * as BookmarksActions from './BookmarksActions';
+import { BOOKMARKS_MODAL } from './BookmarksConstants';
+import * as bookmarksActions from './BookmarksActions';
+import { bindForemanModalActionsToId } from '../ForemanModal/ForemanModalActions';
+import { selectIsModalOpen } from '../ForemanModal/ForemanModalSelectors';
 import Bookmarks from './Bookmarks';
 import reducer from './BookmarksReducer';
 import {
-  selectBookmarksShowModal,
   selectBookmarksStatus,
   selectBookmarksResults,
   selectBookmarksErrors,
@@ -13,9 +15,16 @@ const mapStateToProps = (state, { controller }) => ({
   errors: selectBookmarksErrors(state, controller),
   bookmarks: selectBookmarksResults(state, controller),
   status: selectBookmarksStatus(state, controller),
-  showModal: selectBookmarksShowModal(state),
+  isModalOpen: selectIsModalOpen(state, BOOKMARKS_MODAL),
 });
+
+const boundModalActions = bindForemanModalActionsToId({ id: BOOKMARKS_MODAL });
+
+const mapDispatchToProps = {
+  ...bookmarksActions,
+  ...boundModalActions, // gives us setModalOpen and setModalClosed
+};
 
 export const reducers = { bookmarks: reducer };
 
-export default connect(mapStateToProps, BookmarksActions)(Bookmarks);
+export default connect(mapStateToProps, mapDispatchToProps)(Bookmarks);

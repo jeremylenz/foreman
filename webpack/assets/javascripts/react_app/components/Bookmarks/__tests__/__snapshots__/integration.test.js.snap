@@ -17,14 +17,18 @@ Object {
     ],
   ],
   "state": Object {
+    "autocomplete": Object {},
     "bookmarks": Object {
-      "currentQuery": "",
       "hosts": Object {
         "errors": null,
         "results": Array [],
         "status": "PENDING",
       },
-      "showModal": false,
+    },
+    "foremanModals": Object {
+      "bookmarksModal": Object {
+        "open": false,
+      },
     },
   },
 }
@@ -67,8 +71,8 @@ Object {
     ],
   ],
   "state": Object {
+    "autocomplete": Object {},
     "bookmarks": Object {
-      "currentQuery": "",
       "hosts": Object {
         "errors": null,
         "results": Array [
@@ -93,7 +97,11 @@ Object {
         ],
         "status": "RESOLVED",
       },
-      "showModal": false,
+    },
+    "foremanModals": Object {
+      "bookmarksModal": Object {
+        "open": false,
+      },
     },
   },
 }
@@ -101,8 +109,8 @@ Object {
 
 exports[`Bookmarks integration test should flow: form submitted 1`] = `
 Object {
+  "autocomplete": Object {},
   "bookmarks": Object {
-    "currentQuery": "",
     "hosts": Object {
       "errors": null,
       "results": Array [
@@ -133,16 +141,23 @@ Object {
       ],
       "status": "RESOLVED",
     },
-    "showModal": false,
+  },
+  "foremanModals": Object {
+    "bookmarksModal": Object {
+      "open": false,
+    },
   },
 }
 `;
 
 exports[`Bookmarks integration test should flow: initial state 1`] = `
 Object {
-  "bookmarks": Object {
-    "currentQuery": "",
-    "showModal": false,
+  "autocomplete": Object {},
+  "bookmarks": Object {},
+  "foremanModals": Object {
+    "bookmarksModal": Object {
+      "open": false,
+    },
   },
 }
 `;
@@ -153,15 +168,15 @@ Object {
     Array [
       Object {
         "payload": Object {
-          "query": "",
+          "id": "bookmarksModal",
         },
-        "type": "BOOKMARKS_MODAL_OPENED",
+        "type": "SET_MODAL_OPEN",
       },
     ],
   ],
   "state": Object {
+    "autocomplete": Object {},
     "bookmarks": Object {
-      "currentQuery": "",
       "hosts": Object {
         "errors": null,
         "results": Array [
@@ -186,7 +201,11 @@ Object {
         ],
         "status": "RESOLVED",
       },
-      "showModal": true,
+    },
+    "foremanModals": Object {
+      "bookmarksModal": Object {
+        "open": true,
+      },
     },
   },
 }

@@ -1,35 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'patternfly-react';
-
+import ForemanModal from '../../ForemanModal';
+import { BOOKMARKS_MODAL } from '../BookmarksConstants';
+import { translate as __ } from '../../../common/I18n';
 import { noop } from '../../../common/helpers';
 import BookmarkForm from './BookmarkForm';
-import { translate as __ } from '../../../../react_app/common/I18n';
 
-const SearchModal = ({ show, onHide, onEnter, title, controller, url }) => (
-  <Modal show={show} enforceFocus onHide={onHide} onEnter={onEnter}>
-    <Modal.Header closeButton>
-      <Modal.Title>{title}</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <BookmarkForm controller={controller} url={url} onCancel={onHide} />
-    </Modal.Body>
-  </Modal>
+const SearchModal = ({ setModalClosed, onEnter, title, controller, url }) => (
+  <ForemanModal
+    id={BOOKMARKS_MODAL}
+    title={title}
+    enforceFocus
+    onEnter={onEnter}
+  >
+    <BookmarkForm
+      controller={controller}
+      url={url}
+      setModalClosed={setModalClosed}
+      onCancel={setModalClosed}
+    />
+  </ForemanModal>
 );
 
 SearchModal.propTypes = {
   controller: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  show: PropTypes.bool,
   title: PropTypes.string,
-  onHide: PropTypes.func,
   onEnter: PropTypes.func,
+  setModalClosed: PropTypes.func.isRequired,
 };
 
 SearchModal.defaultProps = {
-  show: true,
   title: __('Create Bookmark'),
-  onHide: noop,
   onEnter: noop,
 };
 

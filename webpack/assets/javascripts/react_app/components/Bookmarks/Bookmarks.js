@@ -6,66 +6,45 @@ import SearchModal from './components/SearchModal';
 import Bookmark from './components/Bookmark';
 import DocumentationUrl from '../common/DocumentationLink';
 import { STATUS } from '../../constants';
-import { bindMethods, noop } from '../../common/helpers';
+import { noop } from '../../common/helpers';
 import { sprintf, translate as __ } from '../../../react_app/common/I18n';
 
-class Bookmarks extends React.Component {
-  constructor(props) {
-    super(props);
-    bindMethods(this, ['handleNewBookmarkClick', 'loadBookmarks']);
-  }
-
-  loadBookmarks() {
-    const { bookmarks, status, url, controller, getBookmarks } = this.props;
+const Bookmarks = props => {
+  const loadBookmarks = () => {
+    const { bookmarks, status, url, controller, getBookmarks } = props;
 
     if (bookmarks.length === 0 && status !== STATUS.PENDING) {
       getBookmarks(url, controller);
     }
-  }
+  };
 
-  handleNewBookmarkClick() {
-    const { showModal, modalClosed, modalOpened, searchQuery } = this.props;
+  const {
+    controller,
+    url,
+    canCreate,
+    bookmarks,
+    errors,
+    status,
+    documentationUrl,
+    onBookmarkClick,
+    setModalOpen,
+    setModalClosed,
+  } = props;
 
-    if (showModal) {
-      modalClosed();
-    } else {
-      modalOpened(searchQuery);
-    }
-  }
-
-  render() {
-    const {
-      controller,
-      url,
-      showModal,
-      modalClosed,
-      canCreate,
-      bookmarks,
-      errors,
-      status,
-      documentationUrl,
-      onBookmarkClick,
-    } = this.props;
-
-    return showModal ? (
+  return (
+    <React.Fragment>
       <SearchModal
-        show={showModal}
         controller={controller}
         url={url}
-        onHide={modalClosed}
+        setModalClosed={setModalClosed}
       />
-    ) : (
-      <Dropdown pullRight id={controller} onClick={this.loadBookmarks}>
+      <Dropdown pullRight id={controller} onClick={loadBookmarks}>
         <Dropdown.Toggle title={__('Bookmarks')}>
           <Icon type="fa" name="bookmark" />
         </Dropdown.Toggle>
         <Dropdown.Menu className="scrollable-dropdown">
           {canCreate && (
-            <MenuItem
-              key="newBookmark"
-              id="newBookmark"
-              onClick={this.handleNewBookmarkClick}
-            >
+            <MenuItem key="newBookmark" id="newBookmark" onClick={setModalOpen}>
               {__('Bookmark this search')}
             </MenuItem>
           )}
@@ -96,36 +75,30 @@ class Bookmarks extends React.Component {
           )}
         </Dropdown.Menu>
       </Dropdown>
-    );
-  }
-}
+    </React.Fragment>
+  );
+};
 
 Bookmarks.propTypes = {
   controller: PropTypes.string.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
-  searchQuery: PropTypes.string,
-  showModal: PropTypes.bool,
   canCreate: PropTypes.bool,
   bookmarks: PropTypes.array,
   errors: PropTypes.string,
   status: PropTypes.string,
   documentationUrl: PropTypes.string,
-  modalClosed: PropTypes.func,
-  modalOpened: PropTypes.func,
   getBookmarks: PropTypes.func,
+  setModalOpen: PropTypes.func.isRequired,
+  setModalClosed: PropTypes.func.isRequired,
 };
 
 Bookmarks.defaultProps = {
-  searchQuery: '',
-  showModal: false,
   canCreate: false,
   bookmarks: [],
   errors: '',
   status: null,
   documentationUrl: '',
-  modalClosed: noop,
-  modalOpened: noop,
   getBookmarks: noop,
 };
 

@@ -4,7 +4,9 @@ import { IntegrationTestHelper } from '@theforeman/test';
 import API from '../../../redux/API/API';
 import { APIMiddleware } from '../../../redux/API';
 
-import Bookmarks, { reducers } from '../index';
+import Bookmarks, { reducers as bookmarksReducer } from '../index';
+import { reducers as autocompleteReducer } from '../../AutoComplete/index';
+import foremanModalsReducer from '../../ForemanModal/ForemanModalReducer';
 import {
   response,
   submitResponse,
@@ -12,6 +14,12 @@ import {
   search,
   publik,
 } from '../Bookmarks.fixtures';
+
+const reducers = {
+  foremanModals: foremanModalsReducer,
+  ...bookmarksReducer,
+  ...autocompleteReducer,
+};
 
 jest.mock('../../../redux/API/API');
 
@@ -28,7 +36,6 @@ describe('Bookmarks integration test', () => {
     API.get.mockImplementation(async () => response);
 
     const testHelper = new IntegrationTestHelper(reducers, [APIMiddleware]);
-
     const component = testHelper.mount(<Bookmarks {...props} />);
     testHelper.takeStoreSnapshot('initial state');
 

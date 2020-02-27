@@ -34,7 +34,6 @@ const ForemanForm = props => (
       const disabled = formProps.isSubmitting || !formProps.isValid;
 
       const submissionError = formProps.errors._error;
-
       return (
         <Form
           onSubmit={formProps.handleSubmit}

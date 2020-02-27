@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BookmarksReducer should hide modal 1`] = `
-Object {
-  "architectures": Object {
-    "errors": null,
-    "results": Array [],
-    "status": "RESOLVED",
-  },
-  "currentQuery": "",
-  "showModal": false,
-}
-`;
-
 exports[`BookmarksReducer should return initial state 1`] = `
 Object {
   "architectures": Object {
@@ -19,8 +7,6 @@ Object {
     "results": Array [],
     "status": "PENDING",
   },
-  "currentQuery": "",
-  "showModal": false,
 }
 `;
 
@@ -31,20 +17,6 @@ Object {
     "results": Array [],
     "status": "ERROR",
   },
-  "currentQuery": "",
-  "showModal": false,
-}
-`;
-
-exports[`BookmarksReducer should show modal 1`] = `
-Object {
-  "architectures": Object {
-    "errors": null,
-    "results": Array [],
-    "status": "RESOLVED",
-  },
-  "currentQuery": "this is a query",
-  "showModal": true,
 }
 `;
 
@@ -55,8 +27,6 @@ Object {
     "results": Array [],
     "status": "PENDING",
   },
-  "currentQuery": "",
-  "showModal": false,
 }
 `;
 
@@ -73,8 +43,6 @@ Object {
     ],
     "status": "RESOLVED",
   },
-  "currentQuery": "",
-  "showModal": false,
 }
 `;
 
@@ -93,7 +61,5 @@ Object {
     ],
     "status": "RESOLVED",
   },
-  "currentQuery": "",
-  "showModal": false,
 }
 `;

@@ -4,8 +4,9 @@ import { IntegrationTestHelper } from '@theforeman/test';
 import { API } from '../../../../../redux/API';
 
 import BookmarkForm from '../index';
-import { reducers } from '../../../index';
-
+import { reducers as bookmarksReducer } from '../../../index';
+import { reducers as autocompleteReducer } from '../../../../AutoComplete/index';
+import foremanModalsReducer from '../../../../ForemanModal/ForemanModalReducer';
 import {
   response,
   name,
@@ -17,11 +18,18 @@ import {
 } from '../../../Bookmarks.fixtures';
 import { BOOKMARKS_SUCCESS } from '../../../BookmarksConstants';
 
+const reducers = {
+  foremanModals: foremanModalsReducer,
+  ...bookmarksReducer,
+  ...autocompleteReducer,
+};
+
 jest.mock('../../../../../redux/API');
 
 const props = {
   url: '/api/v2/hosts',
   controller: 'hosts',
+  setModalClosed: jest.fn(),
 };
 
 describe('Bookmark form integration test', () => {
@@ -44,7 +52,6 @@ describe('Bookmark form integration test', () => {
     expect(
       component.find('Button[bsStyle="default"]').props().disabled
     ).not.toBeTruthy();
-
     component
       .find('input[name="name"]')
       .simulate('change', { target: { name: 'name', value: name } });

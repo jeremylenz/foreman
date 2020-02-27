@@ -9,10 +9,11 @@ const commonFixture = {
   url: '/api/v2/architectures',
   documentationUrl: 'https://test-docs.com',
   canCreate: true,
-  showModal: false,
   status: STATUS.PENDING,
   errors: null,
   bookmarks: [],
+  setModalOpen: jest.fn(),
+  setModalClosed: jest.fn(),
 };
 
 const fixtures = {
