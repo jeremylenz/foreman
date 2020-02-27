@@ -55,5 +55,5 @@ jobs:
       if: success()
       uses: thollander/actions-comment-pull-request@master
       with:
-        message: "PR merged succesfully; Main [Storybook](https://jeremylenz.github.io/foreman/storybooks/main) deployed to the `gh-pages` branch."
+        message: "PR merged succesfully; Main [Storybook](https://jeremylenz.github.io/foreman/storybooks/main/) deployed to the `gh-pages` branch."
         GITHUB_TOKEN: ${{ github.token }}
