@@ -36,6 +36,8 @@ jobs:
         git status
     - name: Tell Github not to use jekyll
       run: touch .nojekyll
+    - name: Update gh-pages branch
+      run: git pull origin gh-pages
     - name: Commit files
       continue-on-error: true
       run: |
