@@ -27,7 +27,7 @@ jobs:
       run: |
         git checkout gh-pages
         ls tmp/storybooks/${{ github.event.pull_request.number }}
-    - name: Move files to storybooks/:pr_num/
+    - name: Move files to storybooks/${{ github.event.pull_request.number }}
       run: |
         mkdir -p storybooks/${{ github.event.pull_request.number }}
         rm -rf storybooks/${{ github.event.pull_request.number }}/*
