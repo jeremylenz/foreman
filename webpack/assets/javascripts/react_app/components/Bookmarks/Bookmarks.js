@@ -16,7 +16,7 @@ const Bookmarks = props => {
     if (bookmarks.length === 0 && status !== STATUS.PENDING) {
       getBookmarks(url, controller);
     }
-  };
+  }; // hi
 
   const {
     controller,
