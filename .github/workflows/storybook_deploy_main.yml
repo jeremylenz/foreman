@@ -28,5 +28,5 @@ jobs:
       if: success()
       uses: thollander/actions-comment-pull-request@master
       with:
-        message: "PR merged succesfully; Storybook at https://foreman.surge.sh has been updated."
+        message: "PR merged succesfully; The Storybook at https://foreman.surge.sh has been updated."
         GITHUB_TOKEN: ${{ github.token }}
