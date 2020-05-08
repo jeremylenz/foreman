@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '**[Ss]tories**'
-    types: [closed]
+    # types: [closed]
 
 jobs:
   deploy_main_storybook:
