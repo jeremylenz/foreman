@@ -23,7 +23,7 @@ jobs:
     - name: Deploy Storybook to surge.sh
       run: |
         npm install --save-dev surge
-        SURGE_LOGIN=${{ secrets.SURGE_LOGIN }} SURGE_TOKEN=${{ secrets.SURGE_TOKEN }} surge --project storybooks/main --domain foreman.surge.sh
+        SURGE_LOGIN=${{ secrets.SURGE_LOGIN }} SURGE_TOKEN=${{ secrets.SURGE_TOKEN }} node_modules/.bin/surge --project storybooks/main --domain foreman.surge.sh
     - name: Comment PR with new Storybook location
       if: success()
       uses: thollander/actions-comment-pull-request@master
