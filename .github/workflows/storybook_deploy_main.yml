@@ -21,10 +21,9 @@ jobs:
     - name: Build Storybook
       run: npm run build-storybook -- --output-dir=storybooks/main
     - name: Deploy Storybook to surge.sh
-      with:
-        env:
-          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      env:
+        SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
       if: ${{ env.SURGE_TOKEN }}
       run: |
         npm install --save-dev surge
