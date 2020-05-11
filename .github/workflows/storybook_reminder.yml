@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - '**/react_app/**js'
-      - '!**.stories.js'
+      - '**[Ss]tories**'
     types: opened
 
 jobs:

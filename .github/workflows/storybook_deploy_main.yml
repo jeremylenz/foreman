@@ -1,16 +1,13 @@
 name: Deploy Main Storybook
 
 on:
-  pull_request:
-    paths:
-      - '**[Ss]tories**'
-    types: [closed]
+  schedule:
+    - cron: '0/5 * * * *'
 
 jobs:
   deploy_main_storybook:
 
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged
 
     steps:
     - uses: actions/checkout@v2
