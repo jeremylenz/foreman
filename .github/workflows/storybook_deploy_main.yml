@@ -4,13 +4,13 @@ on:
   pull_request:
     paths:
       - '**[Ss]tories**'
-    # types: [closed]
+    types: [closed]
 
 jobs:
   deploy_main_storybook:
 
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged
+    if: github.event.pull_request.merged
 
     steps:
     - uses: actions/checkout@v2
@@ -21,12 +21,16 @@ jobs:
     - name: Build Storybook
       run: npm run build-storybook -- --output-dir=storybooks/main
     - name: Deploy Storybook to surge.sh
-      if: ${{ secrets.SURGE_TOKEN }}
+      id: surge_deploy
+      env:
+        SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+        SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+      if: ${{ env.SURGE_TOKEN }}
       run: |
         npm install --save-dev surge
-        SURGE_LOGIN=${{ secrets.SURGE_LOGIN }} SURGE_TOKEN=${{ secrets.SURGE_TOKEN }} node_modules/.bin/surge --project storybooks/main --domain foreman.surge.sh
+        node_modules/.bin/surge --project storybooks/main --domain foreman.surge.sh
     - name: Comment PR with new Storybook location
-      if: success()
+      if: steps.surge_deploy.outcome != 'skipped'
       uses: thollander/actions-comment-pull-request@master
       with:
         message: "PR merged succesfully; The Storybook at https://foreman.surge.sh has been updated."
