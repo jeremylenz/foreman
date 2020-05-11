@@ -21,6 +21,7 @@ jobs:
     - name: Build Storybook
       run: npm run build-storybook -- --output-dir=storybooks/main
     - name: Deploy Storybook to surge.sh
+      id: surge_deploy
       env:
         SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
         SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -29,7 +30,7 @@ jobs:
         npm install --save-dev surge
         node_modules/.bin/surge --project storybooks/main --domain foreman.surge.sh
     - name: Comment PR with new Storybook location
-      if: success()
+      if: steps.surge_deploy.outcome != 'skipped'
       uses: thollander/actions-comment-pull-request@master
       with:
         message: "PR merged succesfully; The Storybook at https://foreman.surge.sh has been updated."
