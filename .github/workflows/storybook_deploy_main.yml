@@ -1,8 +1,9 @@
 name: Deploy Main Storybook
 
 on:
-  schedule:
-    - cron: '0 7 * * *'
+  push:
+    branches:
+      - develop
 
 jobs:
   deploy_main_storybook:
